@@ -32,6 +32,11 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Popover from "@mui/material/Popover";
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { alpha } from "@mui/material/styles";
 
@@ -293,180 +298,167 @@ export default function Home(props) {
   };
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <Drawer
-        variant='permanent'
-        open={open}
-        PaperProps={{
-          sx: {
-            backgroundColor: "#0A0927",
-            color: "white",
-          },
-        }}>
-        <DrawerHeader>
-          <IconButton
-            aria-label='open drawer'
-            onClick={handleDrawerOpen}
-            edge='start'>
-            <MenuIcon sx={{ color: "white" }} />
-          </IconButton>
-          {open && (
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "rtl" ? (
-                <h1>
-                  <ChevronRightIcon />
-                </h1>
-              ) : (
-                <Typography sx={{ color: "white" }}>
-                  Selena
-                  <ChevronLeftIcon />
-                </Typography>
-              )}
-            </IconButton>
-          )}
-        </DrawerHeader>
-        <Divider />
-        <List>
-          <Box variant='button' onClick={ApolloStationShow}>
-            <SidebarItems key={"apollo"} name={"Apollo Station"} open={open} />
-          </Box>
-          <Box variant='button' onClick={DeepMoonQuakeShow}>
-            <SidebarItems key={2} name={"Deep Moonquake"} open={open} />
-          </Box>
-          <Box variant='button' onClick={ShallowMoonQuakeShow}>
-            <SidebarItems key={3} name={"Shallow Moonquake"} open={open} />
-          </Box>
-          <Box variant='button' onClick={MeteroiteMoonQuakeShow}>
-            <SidebarItems key={4} name={"Meteroite Moonquake"} open={open} />
-          </Box>
-          <Box variant='button' onClick={ArtificialImpactShow}>
-            <SidebarItems key={6} name={"Artifical Impact"} open={open} />
-          </Box>
-          <Link href='/learn_moonquake'>
-            <Box variant='button'>
-              <SidebarItems key={5} name={"Learn Moonquake"} open={open} />
-            </Box>
-          </Link>
-        </List>
-      </Drawer>
+    <CssBaseline />
+    <Drawer
+      variant='permanent'
+      open={open}
+      PaperProps={{
+        sx: {
+          backgroundColor: "#0A0927",
+          color: "white",
+        },
+      }}>
+     <DrawerHeader>
+  <Stack direction="row" alignItems="center">
+    {open ? ( // Display ChevronLeftIcon when drawer is open
+      <IconButton onClick={handleDrawerClose}>
+        <ChevronLeftIcon sx={{ color: "white" }}/>
+      </IconButton>
+    ) : ( // Display MenuIcon when drawer is closed
+      <IconButton
+        aria-label="open drawer"
+        onClick={handleDrawerOpen}
+        edge="start"
+      >
+        <MenuIcon sx={{ color: "white" }} />
+      </IconButton>
+    )}
+  </Stack>
+</DrawerHeader>
 
-      <Canvas
-        style={{
-          backgroundColor: "black",
-          height: "100vh",
-          position: "absolute",
-        }}>
-        <OrbitControls />
-        <Sphere
-          scaling={scaling}
-          station={station}
-          meteroite={meteroite}
-          dm={dm}
-          sm={sm}
-          ai={ai}
-          rotation={rotation}
-        />
-        {/* {station &&
-          ApolloStation.map((x) => (
-            <>
-              <LandingSite
-                station={{
-                  lat: x.Lat,
-                  long: x.Long,
-                  apollo: x.LM,
-                  scaling: scaling,
+      <Divider />
+      <List>
+        <Box variant='button' onClick={ApolloStationShow}>
+          <SidebarItems key={"apollo"} name={"Apollo Station"} open={open} />
+        </Box>
+        <Box variant='button' onClick={DeepMoonQuakeShow}>
+          <SidebarItems key={2} name={"Deep Moonquake"} open={open} />
+        </Box>
+        <Box variant='button' onClick={ShallowMoonQuakeShow}>
+          <SidebarItems key={3} name={"Shallow Moonquake"} open={open} />
+        </Box>
+        <Box variant='button' onClick={MeteroiteMoonQuakeShow}>
+          <SidebarItems key={4} name={"Meteroite Moonquake"} open={open} />
+        </Box>
+        <Box variant='button' onClick={ArtificialImpactShow}>
+          <SidebarItems key={6} name={"Artifical Impact"} open={open} />
+        </Box>
+        <Link href='/learn_moonquake'>
+          <Box variant='button'>
+            <SidebarItems key={5} name={"Learn Moonquake"} open={open} />
+          </Box>
+        </Link>
+      </List>
+    </Drawer>
+    
+    <Canvas
+      style={{
+        backgroundColor: "black",
+        height: "100vh",
+        position: "absolute",
+      }}>
+      <OrbitControls />
+      <Sphere
+        scaling={scaling}
+        station={station}
+        meteroite={meteroite}
+        dm={dm}
+        sm={sm}
+        ai={ai}
+        rotation={rotation}
+      />
+    
+      <SkyBox />
+      <ambientLight />
+      <directionalLight position={[5, 3, 5]} color={0xffffff} intensity={1} />
+      <Html>
+        <div>
+          <div
+            style={{
+              position: "relative",
+              display:"flex",
+             
+              top: "40vh",
+              left: "-35vw",
+            }}>
+            <Stack
+              sx={{ bottom: "0", position: "absolute" }}
+              direction='row'
+              spacing={2}>
+              <IconButton
+                aria-label='delete'
+                size='large'
+                onClick={ZoomIn}
+                sx={{
+                  backgroundColor: "white",
+                  ":hover": { backgroundColor: "blue" },
+                }}>
+                <AddIcon sx={{ color: "black", fontSize: "22px" }} />
+              </IconButton>
+              <IconButton
+                aria-label='delete'
+                size='large'
+                onClick={ZoomOut}
+                sx={{
+                  backgroundColor: "white",
+                  ":hover": { backgroundColor: "blue" },
+                }}>
+                <RemoveIcon sx={{ color: "black", fontSize: "22px" }} />
+              </IconButton>
+              <IconButton
+                aria-label='delete'
+                size='large'
+                onClick={(e) => {
+                  setRotation(!rotation);
                 }}
-                color='blue'
-              />
-            </>
-          ))}
-
-        {sm &&
-          ShallowMoonquake.map((x) => (
-            <LandingSite
-              station={{ lat: x.Lat, long: x.Long, scaling: scaling }}
-              color='green'
-            />
-          ))}
-        {dm &&
-          DeepMoonquake.map((x) => (
-            <LandingSite
-              station={{ lat: x.Lat, long: x.Long, scaling: scaling }}
-              color='red'
-            />
-          ))} */}
-
-        <SkyBox />
-        <ambientLight />
-        <directionalLight position={[5, 3, 5]} color={0xffffff} intensity={1} />
-        <Html>
-          <div>
-            <div
-              style={{
-                position: "relative",
-                top: "40vh",
-                left: "30vw",
-              }}>
-              <Stack
-                sx={{ bottom: "0", position: "absolute" }}
-                direction='row'
-                spacing={2}>
-                <IconButton
-                  aria-label='delete'
-                  size='large'
-                  onClick={ZoomIn}
-                  sx={{
-                    backgroundColor: "white",
-                    ":hover": { backgroundColor: "blue" },
-                  }}>
-                  <AddIcon sx={{ color: "black", fontSize: "22px" }} />
-                </IconButton>
-                <IconButton
-                  aria-label='delete'
-                  size='large'
-                  onClick={ZoomOut}
-                  sx={{
-                    backgroundColor: "white",
-                    ":hover": { backgroundColor: "blue" },
-                  }}>
-                  <RemoveIcon sx={{ color: "black", fontSize: "22px" }} />
-                </IconButton>
-                <IconButton
-                  aria-label='delete'
-                  size='large'
-                  onClick={(e) => {
-                    setRotation(!rotation);
-                  }}
-                  sx={{
-                    backgroundColor: "white",
-                    ":hover": { backgroundColor: "blue" },
-                  }}>
-                  <ThreeDRotationIcon
-                    sx={{ color: "black", fontSize: "22px" }}
-                  />
-                </IconButton>
-              </Stack>
-            </div>
-            <div
-              style={{
-                position: "relative",
-                bottom: "45vh",
-                left: "27vw",
-              }}>
-              <Card sx={{ minWidth: 250, maxWidth: 500 }}>
-                <CardContent>
-                  <Typography gutterBottom variant='h6' component='div'>
-                    {title}
-                  </Typography>
-                  <Typography variant='subtitle2' color='text.secondary'>
-                    {description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </div>
+                sx={{
+                  backgroundColor: "white",
+                  ":hover": { backgroundColor: "blue" },
+                }}>
+                <ThreeDRotationIcon
+                  sx={{ color: "black", fontSize: "22px" }}
+                />
+              </IconButton>
+            </Stack>
           </div>
-        </Html>
-      </Canvas>
-    </Box>
+          <div
+            style={{
+              position: "relative",
+              bottom: "49vh",
+              left: "-35vw",
+              display:"flex",
+              alignContent:"center",
+              justifyItems:"center"
+            }}>
+            {/* <Card sx={{ minWidth: 250, maxWidth: 500,  }}>
+              <CardContent>
+                <Typography gutterBottom variant='h6' component='div'>
+                  {title}
+                </Typography>
+                <Typography variant='subtitle2' color='text.secondary'>
+                  {description}
+                </Typography>
+              </CardContent>
+            </Card> */}
+             <Accordion sx={{ minWidth: 250, maxWidth: 500,  }}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          {title}
+        </AccordionSummary>
+        <AccordionDetails>
+         {description}
+        </AccordionDetails>
+      </Accordion>
+          </div>
+        </div>
+      </Html>
+    </Canvas>
+    </Box> 
+    
   );
 }
+
+ 
