@@ -42,7 +42,7 @@ import { alpha } from "@mui/material/styles";
 
 import SidebarItems from "../components/ui/SiderbarItems";
 import Link from "next/link";
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const MoonRadius = 2;
 
@@ -379,7 +379,7 @@ export default function Home(props) {
               display:"flex",
              
               top: "40vh",
-              left: "-35vw",
+              left: "-5vw",
             }}>
             <Stack
               sx={{ bottom: "0", position: "absolute" }}
@@ -425,7 +425,7 @@ export default function Home(props) {
             style={{
               position: "relative",
               bottom: "49vh",
-              left: "-35vw",
+              left:"-5vw",
               display:"flex",
               alignContent:"center",
               justifyItems:"center"
@@ -440,7 +440,7 @@ export default function Home(props) {
                 </Typography>
               </CardContent>
             </Card> */}
-             <Accordion sx={{ minWidth: 250, maxWidth: 500,  }}>
+             <Accordion sx={{ minWidth: 230, maxWidth: 500,  }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"

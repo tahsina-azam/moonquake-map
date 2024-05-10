@@ -450,22 +450,25 @@ export default function LearnMoonquakeMap() {
 
   return (
     <div>
-      <Link href="/">
+      
+    <div>
+    <Box sx={{ backgroundImage: 'url("bg.jpg")' }}>
+
+    <Link href="/">
       <Typography
       sx={{
         fontFamily: "Comfortaa",
         fontWeight: "bold",
-        fontSize: "20px",
+        fontSize: "14px",
         color: "white",
-        m: 2,
         display:"flex",
+        marginBottom:4,
         justifyContent:"center"
       }}>
       Go Back {" >"}
     </Typography>
     </Link>
-    <div>
-    <Box sx={{ backgroundImage: 'url("bg.jpg")' }}>
+
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card
         sx={{
@@ -527,7 +530,7 @@ export default function LearnMoonquakeMap() {
         display:"flex",
         justifyContent:"center"
       }}>
-      Apollo Lunar Modules:
+      Apollo Lunar Modules
     </Typography>
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card
