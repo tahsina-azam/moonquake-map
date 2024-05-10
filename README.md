@@ -28,7 +28,7 @@ From the Apollo Passive Seismic Experiment Expanded Event Catalog, we got the se
 https://www.darts.isas.jaxa.jp/pub/apollo/: By using this JAXA site we get the magnetic tapes to send by the apollo lunar modules back to earth. We used python modules such as Obspy to transform the binary files to time-series to visualize the seismic events more clearly.
 
 # Checkout our deployed version:
-https://moonquake-map.vercel.app/
+https://moonquake-k3mxkhhb4-tahsinaazams-projects.vercel.app/
 
 
 
